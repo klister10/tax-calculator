@@ -5,7 +5,6 @@ import {
   SelectItem,
   Checkbox
 } from "@nextui-org/react";
-import { standardDeduction } from '../data/taxBrackets';
 import CurrencyInput from "./CurrencyInput";
 
 // TODO: move this to a separate file
@@ -76,11 +75,11 @@ const TaxForm = ({formValues, setFormValues}) => {
       </div>
 
       <CurrencyInput 
-        placeholder={standardDeduction.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} 
-        label="Yearly Deductions"
-        value={formValues.yearlyDeduction}
+        placeholder={"0.00"} 
+        label="Yearly Business Expenses"
+        value={formValues.yearlyBusinessExpenses}
         onChange={(value) => {
-          setFormValues({...formValues, yearlyDeduction: value})
+          setFormValues({...formValues, yearlyBusinessExpenses: value})
         }}
       />
     </div>

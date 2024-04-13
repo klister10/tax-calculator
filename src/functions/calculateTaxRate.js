@@ -5,8 +5,11 @@ import {
   federalRates,
   selfEmploymentTaxRate, 
   socialSecurityEmployeeContribution,
+  standardDeduction,
 } from "../data/taxBrackets";
 import moment from "moment";
+
+//TODO don't let this go negative
 
 function calculateStateTax(earnedIncome, state) {
   return earnedIncome * rateByState[state];
@@ -55,10 +58,10 @@ function calculatePayPeriodPercentOfYear(payPeriodStart, payPeriodEnd) {
 
 
 export function calculateTotalWithholding(formValues) {
-  const { earnedIncome, state, payDate, lastPayDate } = formValues;
-  const yearlyIncome = calculateYearlyIncome(earnedIncome, lastPayDate, payDate);
-  const federalTaxableYearlyIncome = yearlyIncome - formValues.yearlyDeduction;
-  const stateTaxableYearlyIncome = yearlyIncome - deductionByState[state];
+  const { earnedIncome, state, payDate, lastPayDate, yearlyBusinessExpenses } = formValues;
+  const yearlyIncome = Math.max(calculateYearlyIncome(earnedIncome, lastPayDate, payDate) - yearlyBusinessExpenses, 0);
+  const federalTaxableYearlyIncome = Math.max(yearlyIncome - standardDeduction, 0);
+  const stateTaxableYearlyIncome = Math.max(yearlyIncome - deductionByState[state], 0);
   const yearlyFederalTax = calculateFederalTax(federalTaxableYearlyIncome);
   const yearlyStateTax = calculateStateTax(stateTaxableYearlyIncome, state);
   const yearlyLocalTax = calculateLocalTax(yearlyIncome, state);
