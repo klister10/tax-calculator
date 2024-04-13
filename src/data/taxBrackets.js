@@ -15,4 +15,8 @@ export const federalRates = [
   {min: 191950.01, max: 243725, rate: .32},
   {min: 243725.01, max: 609350, rate: .35},
   {min: 609350.01, max: null, rate: .37},
-]
+];
+
+export const selfEmploymentTaxRate = .153;
+
+export const standardDeduction = 14600;

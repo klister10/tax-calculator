@@ -2,9 +2,14 @@ import React from 'react';
 import {
   Input
 } from "@nextui-org/react";
-import './currencyInput.scss';
 
-const CurrencyInput = ({placeholder, label}) => {
+const CurrencyInput = ({placeholder, label, onChange, value}) => {
+  const handleChange = (e) => {
+    const value = e.target.value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters
+    const formattedValue = parseFloat(value) || 0.00;
+    onChange(formattedValue);
+  };
+
   return (
     <div className="currencyInput">
       <span className="dollarPrefix">$</span>
@@ -13,6 +18,8 @@ const CurrencyInput = ({placeholder, label}) => {
         type="text"
         label={label}
         labelPlacement="outside"
+        value={value}
+        onChange={handleChange}
       />
     </div>
   );

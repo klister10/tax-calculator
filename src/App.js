@@ -1,61 +1,47 @@
-import * as React from "react";
+import React, {useState} from "react";
 
 import {
-  NextUIProvider, 
-  Input, 
-  Select, 
-  SelectItem,
-  Checkbox
+  NextUIProvider
 } from "@nextui-org/react";
 import './App.scss';
-import CurrencyInput from "./components/CurrencyInput";
+import TaxForm from "./components/TaxForm";
+import ResultsModal from "./components/ResultsModal";
+import moment from "moment";
 
-// TODO: move this to a separate file
-const states = [
-  {label: "Kentucky", value: "KY"},
-];
 
-//TODO: control components with state
 
 export default function App() {
+  const [formValues, setFormValues] = useState({
+    state: "KY",
+    earnedIncome: 0,
+    selfEmployed: true,
+    payDate: moment().toDate(),
+    lastPayDate: moment().subtract(7, 'days').toDate(),
+  });
+
+  const [showResults, setShowResults] = useState(false);
+
+  const openResultsModal = () => {
+    setShowResults(true);
+  }
+
+  const closeResultsModal = () => {
+    setShowResults(false);
+  }
+
   return (
     <NextUIProvider>
       <div className="app">
         <div className={"pageTitle"}>
           2024 Tax Calculator
         </div>
-        <div className="formWrapper">
-          <CurrencyInput placeholder="0.00" label="Earned Income Since Last Withholding"/>
-          <Select 
-            label="State" 
-            placeholder={" " /*this is necessary because the label defaults to inside if there is no placeholder*/}
-            labelPlacement="outside"
-          >
-            {states.map((state) => (
-              <SelectItem key={state.value} value={state.value}>
-                {state.label}
-              </SelectItem>
-            ))}
-          </Select>
-          <Checkbox defaultSelected>I'm self employed</Checkbox>
-          <div className="dateWrapper">
-            <Input
-              defaultValue={new Date().toISOString().split('T')[0]}
-              type="date"
-              label="Pay Date"
-              labelPlacement="outside"
-            />
-            <span className="dateSpacer"/>
-            <Input
-              defaultValue={new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
-              type="date"
-              label="Last Pay Date"
-              labelPlacement="outside"
-            />
-          </div>
-          <CurrencyInput placeholder="15,000.00" label="Yearly Deductions"/>
-        </div>
-        <div className="submitButton">
+        {!showResults &&
+          <TaxForm formValues={formValues} setFormValues={setFormValues}/>
+        }
+        {showResults &&
+          <ResultsModal formValues={formValues} closeResultsModal={closeResultsModal}/>
+        }
+        <div className="submitButton" onClick={openResultsModal}>
           Calculate Withholding
         </div>
       </div>

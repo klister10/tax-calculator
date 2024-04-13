@@ -1,0 +1,19 @@
+.taxForm {
+  background-color: rgba($secondary-color, 0.5);
+  padding: 50px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 500px;
+  width: 70vmin;
+  border-radius: 20px;
+  .dateWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .dateSpacer {
+      width: 5vmin;
+    }
+  }
+}

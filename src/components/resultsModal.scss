@@ -1,0 +1,51 @@
+.resultsModal {
+  background-color: rgba($secondary-color, 0.5);
+  padding: 50px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 500px;
+  width: 70vmin;
+  border-radius: 20px;
+  position: relative;
+  align-items: center;
+  .resultsTitle{
+    font-size: 4vmin;
+    font-weight: bold;
+  }
+  .withholdingAmount {
+    font-size: 11vmin;
+    font-weight: bolder;
+    color: darken($accent-color, 10%);
+  }
+  .amountRemaining {
+    font-size: 2vmin;
+    .title{
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  }
+  .closeButton {
+    background-color: #FF7F50;
+    color: #FFFFF0;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 3vmin;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    &:hover {
+      background-color: darken($accent-color, 10%);
+    }
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}
