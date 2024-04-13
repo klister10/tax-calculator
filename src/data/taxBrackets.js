@@ -2,6 +2,10 @@ export const rateByState = {
   KY: .04,
 }
 
+export const deductionByState = {
+  KY: 3160,
+}
+
 export const localRate = .022; // TODO: this is just for louisville. make this something the user can change
 
 // these rates come from here https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2024
@@ -19,6 +23,6 @@ export const federalRates = [
 
 export const selfEmploymentTaxRate = .153;
 
-export const socialSecurityEmployeeContribution = .062;
+export const socialSecurityEmployeeContribution = .0765;
 
 export const standardDeduction = 14600;

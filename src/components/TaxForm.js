@@ -14,6 +14,7 @@ const states = [
 ];
 
 //TODO: debounce checkbox
+//TODO: make responsive for mobile
 
 
 const TaxForm = ({formValues, setFormValues}) => {

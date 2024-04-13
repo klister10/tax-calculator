@@ -1,5 +1,6 @@
 import { 
   rateByState,
+  deductionByState,
   localRate,
   federalRates,
   selfEmploymentTaxRate, 
@@ -56,13 +57,26 @@ function calculatePayPeriodPercentOfYear(payPeriodStart, payPeriodEnd) {
 export function calculateTotalWithholding(formValues) {
   const { earnedIncome, state, payDate, lastPayDate } = formValues;
   const yearlyIncome = calculateYearlyIncome(earnedIncome, lastPayDate, payDate);
-  const taxableYearlyIncome = yearlyIncome - formValues.yearlyDeduction;
-  const yearlyFederalTax = calculateFederalTax(taxableYearlyIncome);
-  const yearlyStateTax = calculateStateTax(taxableYearlyIncome, state);
-  const yearlyLocalTax = calculateLocalTax(taxableYearlyIncome);
+  const federalTaxableYearlyIncome = yearlyIncome - formValues.yearlyDeduction;
+  const stateTaxableYearlyIncome = yearlyIncome - deductionByState[state];
+  const yearlyFederalTax = calculateFederalTax(federalTaxableYearlyIncome);
+  const yearlyStateTax = calculateStateTax(stateTaxableYearlyIncome, state);
+  const yearlyLocalTax = calculateLocalTax(yearlyIncome);
   const yearlySelfEmploymentTax = formValues.selfEmployed ? calculateSelfEmploymentTax(yearlyIncome) : 0;
   const yearlySocialSecurityTax = formValues.selfEmployed ? 0 : calculateSocialSecurityTax(yearlyIncome);
   const totalYearlyTax = yearlyFederalTax + yearlyStateTax + yearlyLocalTax + yearlySelfEmploymentTax + yearlySocialSecurityTax;
 
+  console.log(
+    "yearlyIncome: ", yearlyIncome,
+    "federalTaxableYearlyIncome: ", federalTaxableYearlyIncome,
+    "stateTaxableYearlyIncome: ", stateTaxableYearlyIncome,
+    "yearlyFederalTax: ", yearlyFederalTax,
+    "yearlyStateTax: ", yearlyStateTax,
+    "yearlyLocalTax: ", yearlyLocalTax,
+    "yearlySelfEmploymentTax: ", yearlySelfEmploymentTax,
+    "yearlySocialSecurityTax: ", yearlySocialSecurityTax,
+    "totalYearlyTax: ", totalYearlyTax,
+    "calculatePayPeriodPercentOfYear(lastPayDate, payDate): ", calculatePayPeriodPercentOfYear(lastPayDate, payDate)
+  )
   return totalYearlyTax * calculatePayPeriodPercentOfYear(lastPayDate, payDate);
 }
