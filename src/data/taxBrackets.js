@@ -1,12 +1,18 @@
 export const rateByState = {
   KY: .04,
+  NM: .05,
 }
 
 export const deductionByState = {
   KY: 3160,
+  NM: 12550,
 }
 
-export const localRate = .022; // TODO: this is just for louisville. make this something the user can change
+// TODO: this is just for louisville. make this something the user can change
+export const localRateByState = {
+  KY: .022,
+  NM: .03813,
+}; 
 
 // these rates come from here https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2024
 // and represent an individual earner's tax rate, which is the same as 1/2 of a married couple's rate

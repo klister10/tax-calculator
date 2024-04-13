@@ -11,6 +11,7 @@ import CurrencyInput from "./CurrencyInput";
 // TODO: move this to a separate file
 const states = [
   {label: "Kentucky", value: "KY"},
+  {label: "New Mexico", value: "NM"},
 ];
 
 //TODO: debounce checkbox

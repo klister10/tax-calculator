@@ -1,7 +1,7 @@
 import { 
   rateByState,
   deductionByState,
-  localRate,
+  localRateByState,
   federalRates,
   selfEmploymentTaxRate, 
   socialSecurityEmployeeContribution,
@@ -12,8 +12,8 @@ function calculateStateTax(earnedIncome, state) {
   return earnedIncome * rateByState[state];
 }
 
-function calculateLocalTax(earnedIncome) {  
-  return earnedIncome * localRate;
+function calculateLocalTax(earnedIncome, state) {  
+  return earnedIncome * localRateByState[state];
 }
 
 function calculateFederalTax(earnedIncome) {
@@ -61,7 +61,7 @@ export function calculateTotalWithholding(formValues) {
   const stateTaxableYearlyIncome = yearlyIncome - deductionByState[state];
   const yearlyFederalTax = calculateFederalTax(federalTaxableYearlyIncome);
   const yearlyStateTax = calculateStateTax(stateTaxableYearlyIncome, state);
-  const yearlyLocalTax = calculateLocalTax(yearlyIncome);
+  const yearlyLocalTax = calculateLocalTax(yearlyIncome, state);
   const yearlySelfEmploymentTax = formValues.selfEmployed ? calculateSelfEmploymentTax(yearlyIncome) : 0;
   const yearlySocialSecurityTax = formValues.selfEmployed ? 0 : calculateSocialSecurityTax(yearlyIncome);
   const totalYearlyTax = yearlyFederalTax + yearlyStateTax + yearlyLocalTax + yearlySelfEmploymentTax + yearlySocialSecurityTax;
