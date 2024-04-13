@@ -1,8 +1,74 @@
+
+
+$primary-color: #36454F;
+$secondary-color: #87CEEB;
+$accent-color: #FF7F50;
+$background-color: #FFFFF0;
+
+
 .app {
   text-align: center;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  background-color: $background-color;
+  color: $primary-color;
+  font-family: 'Lato', sans-serif;
+  padding: 20px 0px;
+  
+  .pageTitle {
+    font-size: 8vmin;
+    font-weight: bold;
+  }
+
+  .formWrapper {
+    background-color: rgba($secondary-color, 0.5);
+    padding: 50px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 500px;
+    width: 70vmin;
+    border-radius: 20px;
+    .dateWrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .dateSpacer {
+        width: 5vmin;
+      }
+    }
+  }
+
+  .submitButton{
+    background-color: $accent-color;
+    color: $background-color;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 3vmin;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($accent-color, 10%);
+    }
+  }
 }
+
+
+/*$primary-color-classic: #003366;
+$secondary-color-classic: #708090;
+$accent-color-classic: #50C878;
+$background-color-classic: #F2F2F2;
+*/
+
+
+
+/*$primary-color-elegant: #005B5B;
+$secondary-color-elegant: #F5F5DC;
+$accent-color-elegant: #FFD700;
+$background-color-elegant: #FFFFF0;
+*/

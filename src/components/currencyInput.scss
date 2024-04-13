@@ -1,0 +1,12 @@
+
+.currencyInput {
+  width: 100%;
+  position: relative;
+  .dollarPrefix {
+    transform: translateY(-50%);
+    font-size: 2vmin;
+    position: absolute;
+    bottom: -5px;
+    left: -13px;
+  }
+}
