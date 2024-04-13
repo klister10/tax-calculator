@@ -19,4 +19,6 @@ export const federalRates = [
 
 export const selfEmploymentTaxRate = .153;
 
+export const socialSecurityEmployeeContribution = .062;
+
 export const standardDeduction = 14600;

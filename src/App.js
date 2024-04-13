@@ -7,6 +7,9 @@ import './App.scss';
 import TaxForm from "./components/TaxForm";
 import ResultsModal from "./components/ResultsModal";
 import moment from "moment";
+import { standardDeduction } from "./data/taxBrackets";
+
+//TODO: add UI to show breakdown
 
 
 
@@ -15,8 +18,9 @@ export default function App() {
     state: "KY",
     earnedIncome: 0,
     selfEmployed: true,
-    payDate: moment().toDate(),
-    lastPayDate: moment().subtract(7, 'days').toDate(),
+    payDate: new Date().toISOString().split('T')[0],
+    lastPayDate: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    yearlyDeduction: standardDeduction,
   });
 
   const [showResults, setShowResults] = useState(false);

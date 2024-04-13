@@ -5,6 +5,7 @@ import {
   SelectItem,
   Checkbox
 } from "@nextui-org/react";
+import { standardDeduction } from '../data/taxBrackets';
 import CurrencyInput from "./CurrencyInput";
 
 // TODO: move this to a separate file
@@ -12,10 +13,10 @@ const states = [
   {label: "Kentucky", value: "KY"},
 ];
 
-//TODO: control components with state
+//TODO: debounce checkbox
+
 
 const TaxForm = ({formValues, setFormValues}) => {
-  // Component logic goes here
 
   return (
     <div className="taxForm">
@@ -23,14 +24,18 @@ const TaxForm = ({formValues, setFormValues}) => {
         placeholder="0.00" 
         label="Earned Income Since Last Withholding"
         value={formValues.earnedIncome}
-        onChange={(value) => setFormValues({...formValues, earnedIncome: value})}
+        onChange={(value) => {
+          setFormValues({...formValues, earnedIncome: value})
+        }}
       />
       <Select 
         label="State" 
         placeholder={" " /*this is necessary because the label defaults to inside if there is no placeholder*/}
         labelPlacement="outside"
         value={formValues.state}
-        onChange={(value) => setFormValues({...formValues, state: value})}
+        onChange={(event) => {
+          setFormValues({...formValues, state: event.target.value})
+        }}
       >
         {states.map((state) => (
           <SelectItem key={state.value} value={state.value}>
@@ -40,7 +45,9 @@ const TaxForm = ({formValues, setFormValues}) => {
       </Select>
       <Checkbox
         defaultSelected={formValues.selfEmployed}
-        onChange={(value) => setFormValues({...formValues, selfEmployed: value})}
+        onChange={(event) => {
+          setFormValues({...formValues, selfEmployed: !formValues.selfEmployed})
+        }}
       >
         I'm self employed
       </Checkbox>
@@ -50,6 +57,8 @@ const TaxForm = ({formValues, setFormValues}) => {
           type="date"
           label="Pay Date"
           labelPlacement="outside"
+          value={formValues.payDate}
+          onChange={(event) => setFormValues({...formValues, payDate: event.target.value})}
         />
         <span className="dateSpacer"/>
         <Input
@@ -57,8 +66,21 @@ const TaxForm = ({formValues, setFormValues}) => {
           type="date"
           label="Last Pay Date"
           labelPlacement="outside"
+          value={formValues.lastPayDate}
+          onChange={(event) => {
+            setFormValues({...formValues, lastPayDate: event.target.value})
+          }}
         />
       </div>
+
+      <CurrencyInput 
+        placeholder={standardDeduction.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} 
+        label="Yearly Deductions"
+        value={formValues.yearlyDeduction}
+        onChange={(value) => {
+          setFormValues({...formValues, yearlyDeduction: value})
+        }}
+      />
     </div>
   );
 };

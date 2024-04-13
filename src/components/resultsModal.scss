@@ -19,11 +19,13 @@
     font-weight: bolder;
     color: darken($accent-color, 10%);
   }
-  .amountRemaining {
-    font-size: 2vmin;
-    .title{
-      font-weight: bold;
-      margin-right: 10px;
+  .details {
+    .detailItem{
+      font-size: 2vmin;
+      .title{
+        font-weight: bold;
+        margin-right: 10px;
+      }
     }
   }
   .closeButton {

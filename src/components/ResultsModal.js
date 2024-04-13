@@ -13,11 +13,19 @@ const ResultsModal = ({formValues, closeResultsModal}) => {
       <div className='withholdingAmount'>
         {amountToWithhold.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
       </div>
-      <div className='amountRemaining'>
-        <span className='title'>Amount Remaining:</span>
-        <span className='amount'>
-          {amountRemaining.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-        </span>
+      <div className='details'>
+        <div className='detailItem'>
+          <span className='title'>Amount Remaining:</span>
+          <span className='value'>
+            {amountRemaining.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </span>
+        </div>
+        <div className='detailItem'>
+          <span className='title'>Total Tax Percent:</span>
+          <span className='value'>
+            {(amountToWithhold / formValues.earnedIncome * 100).toFixed(2)}%
+          </span>
+        </div>
       </div>
     </div>
   );
