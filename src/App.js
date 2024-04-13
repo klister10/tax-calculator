@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
 
-function App() {
+import {NextUIProvider, Input} from "@nextui-org/react";
+import './App.scss';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NextUIProvider>
+      <div className="app">
+        <div className={"pageTitle"}>
+          2024 Tax Calculator
+        </div>
+        <Input
+          type="number"
+          label="Earned Income Since Last Withholding"
+          placeholder={" " /*this is necessary because the label defaults to inside if there is no placeholder*/}
+          labelPlacement="outside"
+        />
+      </div>
+    </NextUIProvider>
   );
 }
 
-export default App;
+//to add to input later to control
+/*onValueChange={handleCenterChange}
+  value={formValues.center}*/
