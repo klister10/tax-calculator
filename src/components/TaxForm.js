@@ -33,9 +33,9 @@ const TaxForm = ({formValues, setFormValues}) => {
         label="State" 
         placeholder={" " /*this is necessary because the label defaults to inside if there is no placeholder*/}
         labelPlacement="outside"
-        value={formValues.state}
-        onChange={(event) => {
-          setFormValues({...formValues, state: event.target.value})
+        selectedKeys={[formValues.state]}
+        onSelectionChange={(newValue) => {
+          setFormValues({...formValues, state: newValue.currentKey})
         }}
       >
         {states.map((state) => (
